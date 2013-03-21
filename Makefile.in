@@ -23,6 +23,7 @@ TEST_JS = $(TEST_COFFEE:.coffee=.test.js)
 
 all: js
 	PHANTOMJS_BIN=$(BIN_PHANTOMJS) $(BIN_KARMA) start tests/testConf.test.js --single-run
+	cp $(JS) $(MINJS) distributes
 
 js: $(JS) $(MINJS) $(TEST_JS)
 
@@ -31,6 +32,6 @@ test: js
 
 clean:
 	find ./ -name .DS_Store -delete
-	rm -f $(TEST_JS)
+	rm -f $(JS) $(MINJS) $(TEST_JS)
 
 .PHONY: all test clean
