@@ -63,3 +63,25 @@ unicodeEastAsianWidth.east_asian_width = (text) ->
       ++width
     ++i
   width
+
+unicodeEastAsianWidth.truncate = (string, length, suffix) ->
+  ret = ""
+  c = undefined
+  clen = undefined
+  counter = 0
+  chars = string.split("")
+  i = undefined
+  l = undefined
+  slen = east_asian_width(suffix)
+  return string if east_asian_width(string) <= length
+  i = 0
+  l = chars.length
+
+  while i < l and counter < length
+    c = chars[i]
+    clen = east_asian_width(c)
+    return ret + suffix  if counter + clen + slen > length
+    ret += c
+    counter += clen
+    i++
+  ret

@@ -2,6 +2,7 @@
 
 east_asian_width = unicodeEastAsianWidth.east_asian_width
 binary_range_search = unicodeEastAsianWidth.binary_range_search
+truncate = unicodeEastAsianWidth.truncate
 
 describe "Unicode EastAsianWidth", ->
   describe "East asian character width", ->
@@ -50,3 +51,18 @@ describe "Unicode EastAsianWidth", ->
       expect(binary_range_search([1, 5], [3, 7], 4)).toBeFalsy()
     it "can check value is out of range4", ->
       expect(binary_range_search([1, 5], [3, 7], 8)).toBeFalsy()
+  describe "tools", ->
+    it "truncate", ->
+      expect(truncate("DOUTOR 新宿アイランド店", 15, "...")).toEqual("DOUTOR 新宿...")
+      expect(truncate("無印良品 アキバ・トリム", 20, "...")).toEqual("無印良品 アキバ・...")
+      expect(truncate("VILLAGE VANGUARD 渋谷宇田川", 15, "...")).toEqual("VILLAGE VANG...")
+      expect(truncate("VILLAGE VANGUARD 渋谷宇田川", 15, "...").length).toEqual(15)
+      expect(truncate("Shinjuku", 15, "…")).toEqual("Shinjuku")
+      expect(truncate("あいうえお", 12, "...")).toEqual("あいうえお")
+      expect(truncate("あいうえお", 11, "...")).toEqual("あいうえお")
+      expect(truncate("あいうえお", 10, "...")).toEqual("あいうえお")
+      expect(truncate("あいうえお", 9, "...")).toEqual("あいう...")
+      expect(truncate("あいうえお", 8, "...")).toEqual("あい...")
+      expect(truncate("あいうえお", 7, "...")).toEqual("あい...")
+      expect(truncate("あいうえお", 6, "...")).toEqual("あ...")
+      expect(truncate("あいうえお", 5, "...")).toEqual("あ...")

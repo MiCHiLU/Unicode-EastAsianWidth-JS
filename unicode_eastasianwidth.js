@@ -99,4 +99,33 @@
     return width;
   };
 
+  unicodeEastAsianWidth.truncate = function(string, length, suffix) {
+    var c, chars, clen, counter, i, l, ret, slen;
+
+    ret = "";
+    c = void 0;
+    clen = void 0;
+    counter = 0;
+    chars = string.split("");
+    i = void 0;
+    l = void 0;
+    slen = east_asian_width(suffix);
+    if (east_asian_width(string) <= length) {
+      return string;
+    }
+    i = 0;
+    l = chars.length;
+    while (i < l && counter < length) {
+      c = chars[i];
+      clen = east_asian_width(c);
+      if (counter + clen + slen > length) {
+        return ret + suffix;
+      }
+      ret += c;
+      counter += clen;
+      i++;
+    }
+    return ret;
+  };
+
 }).call(this);
