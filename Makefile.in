@@ -10,7 +10,7 @@ BIN_PHANTOMJS=$(HOME)/local/bin/phantomjs
 	$(BIN_COFFEE) -c $<
 .SUFFIXES: .js .min.js
 .js.min.js:
-	$(BIN_UGLIFYJS) --define PRODUCTION=0 -nc -o $@ $<
+	$(BIN_UGLIFYJS) --define PRODUCTION=0 -nc -m -o $@ $<
 .SUFFIXES: .coffee .test.js
 .coffee.test.js:
 	$(BIN_COFFEE) -b -c -p $< >$@
