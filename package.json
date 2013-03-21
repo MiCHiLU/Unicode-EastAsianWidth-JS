@@ -1,0 +1,23 @@
+{
+  "name": "unicode-eastasianwidth",
+  "version": "0.0.1",
+  "description": "Counting the unicode characters based Unicode East Asian Width database. It includes some tools for dealing with characters.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MiCHiLU/Unicode-EastAsianWidth-JS.git"
+  },
+  "main": "./unicode_eastasianwidth.js",
+  "devDependencies": {
+    "coffee-script": ">=1.3.1",
+    "karma": "*",
+    "uglify-js": ">=1.3.4"
+  },
+  "scripts": {
+    "test": "make js && karma start tests/testConf.test.js --single-run"
+  },
+  "keywords": [
+    "unicode"
+  ],
+  "author": "ENDOH takanao",
+  "license": "MIT"
+}

@@ -1,0 +1,12 @@
+coverage
+
+syntax: glob
+
+*.sw?
+*.test.js
+*~
+.DS_Store
+node_modules
+tags
+
+syntax: regexp
