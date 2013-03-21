@@ -51,9 +51,10 @@ unicodeEastAsianWidth.width = (text) ->
   while i < text.length
     code = text.charCodeAt(i)
     if isSurrogate(code)
-      throw new Error("UTF-16 decode error") unless isHighSurrogate(code)
+      message = "UTF-16 decode error"
+      throw new Error(message) unless isHighSurrogate(code)
       low_code = text.charCodeAt(++i)
-      throw new Error("UTF-16 decode error") unless isLowSurrogate(low_code)
+      throw new Error(message) unless isLowSurrogate(low_code)
       code = decodeSurrogatePair(code, low_code)
     if binaryRangeSearch(start_group, end_group, code)
       width += 2
