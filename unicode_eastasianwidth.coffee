@@ -32,7 +32,7 @@ kSurrogateMax = kLowSurrogateMax
 kSurrogateMask = (1 << (kSurrogateBits + 1)) - 1
 kHighSurrogateOffset = kHighSurrogateMin - (0x10000 >> 10)
 
-binary_range_search = (heads, tails, value) ->
+unicodeEastAsianWidth._binaryRangeSearch = binaryRangeSearch = (heads, tails, value) ->
   head = 0
   tail = heads.length - 1
   while head <= tail
@@ -45,9 +45,7 @@ binary_range_search = (heads, tails, value) ->
       head = where + 1
   value <= tails[tail]
 
-unicodeEastAsianWidth.binary_range_search = binary_range_search
-
-unicodeEastAsianWidth.east_asian_width = (text) ->
+unicodeEastAsianWidth.width = (text) ->
   width = 0
   i = 0
   while i < text.length
@@ -57,7 +55,7 @@ unicodeEastAsianWidth.east_asian_width = (text) ->
       low_code = text.charCodeAt(++i)
       throw new Error("UTF-16 decode error") unless isLowSurrogate(low_code)
       code = decodeSurrogatePair(code, low_code)
-    if binary_range_search(start_group, end_group, code)
+    if binaryRangeSearch(start_group, end_group, code)
       width += 2
     else
       ++width
@@ -72,14 +70,14 @@ unicodeEastAsianWidth.truncate = (string, length, suffix) ->
   chars = string.split("")
   i = undefined
   l = undefined
-  slen = east_asian_width(suffix)
-  return string if east_asian_width(string) <= length
+  slen = width(suffix)
+  return string if width(string) <= length
   i = 0
   l = chars.length
 
   while i < l and counter < length
     c = chars[i]
-    clen = east_asian_width(c)
+    clen = width(c)
     return ret + suffix  if counter + clen + slen > length
     ret += c
     counter += clen
