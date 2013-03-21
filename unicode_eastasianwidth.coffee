@@ -63,23 +63,16 @@ unicodeEastAsianWidth.width = (text) ->
   width
 
 unicodeEastAsianWidth.truncate = (string, length, suffix) ->
-  ret = ""
-  c = undefined
-  clen = undefined
-  counter = 0
-  chars = string.split("")
-  i = undefined
-  l = undefined
+  if width(string) <= length
+    return string
   slen = width(suffix)
-  return string if width(string) <= length
-  i = 0
-  l = chars.length
-
-  while i < l and counter < length
-    c = chars[i]
+  ret = ""
+  count = 0
+  for c in string.split("")
     clen = width(c)
-    return ret + suffix  if counter + clen + slen > length
+    if count + clen + slen > length
+      ret += suffix
+      break
     ret += c
-    counter += clen
-    i++
+    count += clen
   ret
