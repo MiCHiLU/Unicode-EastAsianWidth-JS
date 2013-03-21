@@ -11,6 +11,22 @@ describe "Unicode EastAsianWidth", ->
       expect(east_asian_width("渋川喜規")).toEqual 8
     it "can count alphabet", ->
       expect(east_asian_width("abcDEF123!$%")).toEqual 12
+    it "can count unicode", ->
+      expect(east_asian_width("\u2026")).toEqual 2
+    it "can count surrogate pair min", ->
+      expect(east_asian_width(String.fromCharCode(0xD800, 0xDC00))).toEqual 1
+    it "can count surrogate pair max", ->
+      expect(east_asian_width(String.fromCharCode(0xDBFF, 0xDFFF))).toEqual 1
+    it "can count surrogate pair width 4", ->
+      expect(east_asian_width(String.fromCharCode(0xD840, 0xDC0B) + String.fromCharCode(0xD869, 0xDEB2))).toEqual 4
+    it "throw error when lower than surrogate pair", ->
+      expect( ->
+        east_asian_width(String.fromCharCode(0xD800, 0xDBFF))
+      ).toThrow(new Error("UTF-16 decode error"))
+    it "throw error when higher than surrogate pair", ->
+      expect( ->
+        east_asian_width(String.fromCharCode(0xDC00, 0xE000))
+      ).toThrow(new Error("UTF-16 decode error"))
   describe "Binary range search", ->
     it "can match boundary", ->
       expect(binary_range_search([1], [5], 1)).toBeTruthy()
