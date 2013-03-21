@@ -71,19 +71,20 @@
   };
 
   unicodeEastAsianWidth.width = function(text) {
-    var code, i, low_code, width;
+    var code, i, low_code, message, width;
 
     width = 0;
     i = 0;
     while (i < text.length) {
       code = text.charCodeAt(i);
       if (isSurrogate(code)) {
+        message = "UTF-16 decode error";
         if (!isHighSurrogate(code)) {
-          throw new Error("UTF-16 decode error");
+          throw new Error(message);
         }
         low_code = text.charCodeAt(++i);
         if (!isLowSurrogate(low_code)) {
-          throw new Error("UTF-16 decode error");
+          throw new Error(message);
         }
         code = decodeSurrogatePair(code, low_code);
       }
