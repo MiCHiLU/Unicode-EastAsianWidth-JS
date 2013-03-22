@@ -9,7 +9,7 @@ It includes some tools for dealing with characters.
 js.unicode_eastasianwidth |Build Status|_
 -----------------------------------------
 
-.. |Build Status| image:: https://travis-ci.org/MiCHiLU/Unicode-EastAsianWidth-JS.png
+.. |Build Status| image:: https://travis-ci.org/MiCHiLU/Unicode-EastAsianWidth-JS.png?branch=python
 .. _`Build Status`: http://travis-ci.org/MiCHiLU/Unicode-EastAsianWidth-JS
 
 Introduction
