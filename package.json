@@ -1,6 +1,6 @@
 {
   "name": "unicode-eastasianwidth",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Counting the unicode characters based Unicode East Asian Width database. It includes some tools for dealing with characters.",
   "repository": {
     "type": "git",
