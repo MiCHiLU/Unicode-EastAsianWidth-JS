@@ -3,11 +3,20 @@ coverage
 
 syntax: glob
 
+*.egg
+*.egg-info
+*.pyc
 *.sw?
 *.test.js
 *~
+*~
 .DS_Store
+.installed.cfg
+bin
+develop-eggs
+dist
 node_modules
+parts
 tags
 
 syntax: regexp
