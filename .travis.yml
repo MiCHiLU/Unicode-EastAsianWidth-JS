@@ -5,5 +5,5 @@ python:
   - 3.2
   - pypy
 install:
-  - pip install .
-script: py.test
+  - cd distributes/python; pip install .
+script: cd distributes/python; py.test
