@@ -1,3 +1,6 @@
+"use strict"
+
+
 if exports?
   unicodeEastAsianWidth = exports
 else
