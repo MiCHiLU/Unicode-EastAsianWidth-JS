@@ -1,17 +1,18 @@
 "use strict"
 
 
+isEmpty = (value) ->
+  angular.isUndefined(value) or value is "" or value is null or value isnt value
+
+int = (str) ->
+  parseInt(str, 10)
+
+
 angular.module("unicode_eastasianwidth", [
 ])
 
 .directive("eastAsianWidth",
 ->
-  isEmpty = (value) ->
-    angular.isUndefined(value) or value is "" or value is null or value isnt value
-
-  int = (str) ->
-    parseInt(str, 10)
-
   require: "ngModel"
   restrict: "A"
   link: (scope, iElement, iAttrs, controller) ->
@@ -32,8 +33,6 @@ angular.module("unicode_eastasianwidth", [
   "length",
 
 (length) ->
-  int = (str) ->
-    parseInt(str, 10)
   length = int(length)
   (value) ->
     unicodeEastAsianWidth.truncate(value, length, "…")
