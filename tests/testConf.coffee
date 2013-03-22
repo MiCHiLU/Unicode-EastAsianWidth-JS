@@ -6,10 +6,13 @@ basePath = "../"
 
 # list of files / patterns to load in the browser
 #files = [JASMINE, JASMINE_ADAPTER, "tests/*Spec.js"]
-files = [JASMINE, JASMINE_ADAPTER, "unicode_eastasianwidth.js", "tests/*Spec.test.js"]
+files = [JASMINE, JASMINE_ADAPTER,
+         "lib/angular-1.1.3/angular.min.js",
+         "lib/angular-1.1.3/angular-mocks.js",
+         "*.js", "tests/*Spec.test.js"]
 
 # list of files to exclude
-exclude = []
+exclude = ["*.min.js"]
 
 preprocessors =
   "**/*.js": "coverage"

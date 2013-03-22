@@ -23,6 +23,7 @@ TEST_JS = $(TEST_COFFEE:.coffee=.test.js)
 
 all: js
 	PHANTOMJS_BIN=$(BIN_PHANTOMJS) $(BIN_KARMA) start tests/testConf.test.js --single-run
+	cat unicode_eastasianwidth.min.js >> angular-unicode_eastasianwidth.min.js
 	cp $(JS) $(MINJS) distributes
 
 js: $(JS) $(MINJS) $(TEST_JS)
