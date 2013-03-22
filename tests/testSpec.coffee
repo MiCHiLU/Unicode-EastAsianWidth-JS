@@ -1,10 +1,11 @@
 "use strict"
 
-width = unicodeEastAsianWidth.width
-binaryRangeSearch = unicodeEastAsianWidth._binaryRangeSearch
-truncate = unicodeEastAsianWidth.truncate
-
 describe "Unicode EastAsianWidth", ->
+
+  width = unicodeEastAsianWidth.width
+  binaryRangeSearch = unicodeEastAsianWidth._binaryRangeSearch
+  truncate = unicodeEastAsianWidth.truncate
+
   describe "East asian character width", ->
     it "can count hiragana", ->
       expect(width("こんにちわ")).toEqual 10

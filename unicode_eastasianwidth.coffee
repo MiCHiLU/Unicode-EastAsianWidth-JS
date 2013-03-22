@@ -64,6 +64,7 @@ unicodeEastAsianWidth.width = (text) ->
   width
 
 unicodeEastAsianWidth.truncate = (string, length, suffix) ->
+  width = unicodeEastAsianWidth.width
   if width(string) <= length
     return string
   slen = width(suffix)
