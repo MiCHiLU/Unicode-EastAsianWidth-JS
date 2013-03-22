@@ -6,7 +6,7 @@ basePath = "../"
 
 # list of files / patterns to load in the browser
 #files = [JASMINE, JASMINE_ADAPTER, "tests/*Spec.js"]
-files = [JASMINE, JASMINE_ADAPTER, "unicode_eastasianwidth.min.js", "tests/*Spec.test.js"]
+files = [JASMINE, JASMINE_ADAPTER, "unicode_eastasianwidth.js", "tests/*Spec.test.js"]
 
 # list of files to exclude
 exclude = []
