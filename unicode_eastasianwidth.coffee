@@ -32,8 +32,23 @@ isLowSurrogate = (uc) ->
 isSurrogate = (uc) ->
   ((uc) & ~kSurrogateMask) is kSurrogateMin
 
+decodeErrorMessage = "UTF-16 decode error"
+
+checkHighSurrogate = (high_code) ->
+  unless isHighSurrogate(high_code)
+    throw new Error(decodeErrorMessage)
+  return
+
+checkLowSurrogate = (low_code) ->
+  unless isLowSurrogate(low_code)
+    throw new Error(decodeErrorMessage)
+  return
+
 decodeSurrogatePair = (high, low) ->
+  checkHighSurrogate(high)
+  checkLowSurrogate(low)
   ((high & kHighSurrogateMask) << kSurrogateBits) + (low & kLowSurrogateMask) + 0x10000
+
 
 unicodeEastAsianWidth._binaryRangeSearch = binaryRangeSearch = (heads, tails, value) ->
   head = 0
@@ -54,10 +69,7 @@ unicodeEastAsianWidth.width = (text) ->
   while i < text.length
     code = text.charCodeAt(i)
     if isSurrogate(code)
-      message = "UTF-16 decode error"
-      throw new Error(message) unless isHighSurrogate(code)
       low_code = text.charCodeAt(++i)
-      throw new Error(message) unless isLowSurrogate(low_code)
       code = decodeSurrogatePair(code, low_code)
     if binaryRangeSearch(start_group, end_group, code)
       width += 2
@@ -65,6 +77,18 @@ unicodeEastAsianWidth.width = (text) ->
       ++width
     ++i
   width
+
+unicodeEastAsianWidth.hasEm = (text) ->
+  i = 0
+  while i < text.length
+    code = text.charCodeAt(i)
+    if isSurrogate(code)
+      low_code = text.charCodeAt(++i)
+      code = decodeSurrogatePair(code, low_code)
+    if binaryRangeSearch(start_group, end_group, code)
+      return true
+    ++i
+  false
 
 unicodeEastAsianWidth.truncate = (string, length, suffix) ->
   width = unicodeEastAsianWidth.width

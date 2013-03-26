@@ -44,3 +44,10 @@ describe "east-asian-width", ->
       expect(truncateFilter("aaaあ")).toEqual("aaaあ")
       expect(truncateFilter("")).toEqual("")
     )
+
+  describe "hasEm", ->
+
+    it "should return hasEm", inject((hasEm) ->
+      expect(hasEm("aaああ")).toEqual true
+      expect(hasEm("aa")).toEqual false
+    )
