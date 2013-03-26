@@ -66,6 +66,21 @@ unicodeEastAsianWidth.width = (text) ->
     ++i
   width
 
+unicodeEastAsianWidth.hasEm = (text) ->
+  i = 0
+  while i < text.length
+    code = text.charCodeAt(i)
+    if isSurrogate(code)
+      message = "UTF-16 decode error"
+      throw new Error(message) unless isHighSurrogate(code)
+      low_code = text.charCodeAt(++i)
+      throw new Error(message) unless isLowSurrogate(low_code)
+      code = decodeSurrogatePair(code, low_code)
+    if binaryRangeSearch(start_group, end_group, code)
+      return true
+    ++i
+  false
+
 unicodeEastAsianWidth.truncate = (string, length, suffix) ->
   width = unicodeEastAsianWidth.width
   if width(string) <= length

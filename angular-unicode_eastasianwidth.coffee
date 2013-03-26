@@ -37,3 +37,6 @@ angular.module("unicode_eastasianwidth", [
   (value) ->
     unicodeEastAsianWidth.truncate(value, length, "…")
 ])
+
+.factory "hasEm", ->
+  unicodeEastAsianWidth.hasEm
