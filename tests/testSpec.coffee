@@ -58,6 +58,7 @@ describe "Unicode EastAsianWidth", ->
       expect(hasEm("DOUTOR 新宿アイランド店")).toEqual(true)
       expect(hasEm("DOUTOR")).toEqual(false)
       expect(hasEm("")).toEqual(false)
+      expect(hasEm(String.fromCharCode(0xD800, 0xDC00))).toEqual false
     it "truncate", ->
       expect(truncate("DOUTOR 新宿アイランド店", 15, "...")).toEqual("DOUTOR 新宿...")
       expect(truncate("無印良品 アキバ・トリム", 20, "...")).toEqual("無印良品 アキバ・...")
