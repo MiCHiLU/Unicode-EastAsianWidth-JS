@@ -50,4 +50,5 @@ describe "east-asian-width", ->
     it "should return hasEm", inject((hasEm) ->
       expect(hasEm("aaああ")).toEqual true
       expect(hasEm("aa")).toEqual false
+      expect(hasEm(undefined)).toEqual false
     )

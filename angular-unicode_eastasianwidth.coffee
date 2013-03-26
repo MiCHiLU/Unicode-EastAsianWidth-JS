@@ -39,4 +39,7 @@ angular.module("unicode_eastasianwidth", [
 ])
 
 .factory "hasEm", ->
-  unicodeEastAsianWidth.hasEm
+  (text) ->
+    unless text?
+      return false
+    unicodeEastAsianWidth.hasEm(text)
